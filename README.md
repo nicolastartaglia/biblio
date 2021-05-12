@@ -30,5 +30,7 @@ Les contraintes :
 
 
 Cas d'utilisation: voir fichier "diagramme cas utilisation.svg" à la racine
+
 Diagrammes d'activités: voir fichier "diagrammes d'activités.svg" à la racine
+
 Maquettes de l'application: voir fichier "maquettes.svg" à la racine
