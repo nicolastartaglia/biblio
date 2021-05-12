@@ -11,6 +11,8 @@ Les fonctionnalités :
 -	Un emprunteur doit pouvoir réserver un objet indisponible en laissant sur la fiche de l’objet son ID emprunteur à partir duquel un email sera envoyé dès que le retour de l’objet sera validé par un bibliothécaire. La réservation est valable 5 jours.
 -	Un bibliothécaire doit pouvoir imprimer un reçu à la demande de l’emprunteur avec la liste des objets empruntés et la date limite de retour.
 -	Un emprunteur doit pouvoir consulter sur la fiche d’un objet le nombre de fois qu’il a été emprunté sur la dernière année glissante (période considérée : date de consultation – 365 jours)
+
+
 Les contraintes :
 -	L’application est livrée de base avec un mot de passe admin par défaut que le bibliothécaire référent doit changer à la première connexion. Ce compte permettra uniquement d’ajouter ou de supprimer des comptes de bibliothécaire utilisateur qui auront le pouvoir de gérer la bibliothèque
 -	La validité d’une inscription dure un an suite au paiement de l’abonnement 
