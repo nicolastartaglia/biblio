@@ -34,3 +34,6 @@ Cas d'utilisation: voir fichier "diagramme cas utilisation.svg" à la racine
 Diagrammes d'activités: voir fichier "diagrammes d'activités.svg" à la racine
 
 Maquettes de l'application: voir fichier "maquettes.svg" à la racine
+
+Backlog accessible à l'adresse: https://trello.com/b/ixVU26vL/gestion-de-biblioth%C3%A8que
+
