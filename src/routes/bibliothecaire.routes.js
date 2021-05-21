@@ -7,7 +7,7 @@ module.exports = function (app) {
     // un nouveau bibliothécaire est créé après s'être assurer que l'email du nouveau bibliothécaire n'existe pas en base de données
     app.post("/bibliothecaire", middlewareVerification.verifierUniciteEmail, controllerConnexion.enregistrerUnBibliothecaire);
 
-    // créer le jeton utilisateur lorsque le password crypté en bd correspond au password fourni à la connexion
+    // créer le jeton utilisateur lorsque le password crypté en BD correspond au password fourni à la connexion
     app.post("/bibliothecaire/connexion", controllerConnexion.seConnecterEnTantQueBibliothecaire);
 
     app.get("/bibliothecaire", controllerBibliothecaire.obtenirTousLesBibliothecaires);
