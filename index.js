@@ -39,7 +39,7 @@ function initial() {
     Nom: "TARTAGLIA",
     Prenom: "Nicolas",
     Email: "ntartaglia@gmail.com",
-    Password: "toto",
+    Password: "$2a$08$lTwGFPh6NoqCs4N/fvaR0un.LLsAE.eQhfBbfzBsmTiPmwo0RpXcy",
     Referent: "true",
     Statut: "actif"
   });

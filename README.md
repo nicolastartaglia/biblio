@@ -1,4 +1,4 @@
-Application mobile de gestion de bibliothèque: 
+Application mobile de gestion de bibliothèque: côté back-end
 
 développeur: Nicolas TARTAGLIA
 

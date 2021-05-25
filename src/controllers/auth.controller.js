@@ -38,12 +38,16 @@ module.exports = {
                         message: "Mot de passe invalide!"
                     });
                 }
-                const token = jwt.sign({ id: unBibliothecaire.id }, config.secret, {
-                    expiresIn: 86400 // 24 hours
+                const token = jwt.sign({ 
+                    id: unBibliothecaire.id,
+                    Nom: unBibliothecaire.Nom,
+                    Prenom: unBibliothecaire.Prenom,
+                    Email: unBibliothecaire.Email,
+                    Referent: unBibliothecaire.Referent
+                     }, config.secret, {
+                    expiresIn: 86400 // 24 heures de validité
                 });
                 return res.status(201).send({
-                    id: unBibliothecaire.id,
-                    email: unBibliothecaire.Email,
                     accessToken: token
                 });
             }
