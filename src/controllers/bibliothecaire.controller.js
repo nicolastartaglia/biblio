@@ -1,14 +1,16 @@
 const bibliothecaire = require("../models").bibliothecaire;
+const bcrypt = require("bcryptjs");
+
 
 module.exports = {
     async obtenirTousLesBibliothecaires(req, res) {
         try {
             const collectionDeBibliothecaires = await bibliothecaire.findAll({});
             if (collectionDeBibliothecaires) {
-                res.status(201).send(collectionDeBibliothecaires);
+                res.status(201).json(collectionDeBibliothecaires);
             }
             else {
-                res.status(404).send("Pas de bibliothecaire")
+                res.status(404).json({"message": "Pas de bibliothecaire"})
             }
         }
         catch (e) {
@@ -22,10 +24,10 @@ module.exports = {
                 where: { id: req.params.bibliothecaireId }
             });
             if (unBibliothecaire) {
-                res.status(201).send(unBibliothecaire);
+                res.status(201).json(unBibliothecaire);
             }
             else {
-                res.status(404).send("bibliothecaire inconnu")
+                res.status(404).json({"message": "bibliothecaire inconnu"});
             }
         }
         catch (e) {
@@ -43,14 +45,14 @@ module.exports = {
                     Nom: req.body.Nom,
                     Prenom: req.body.Prenom,
                     Email: req.body.Email,
-                    Password: req.body.Password,
+                    Password: bcrypt.hashSync(req.body.Password, 8),
                     Referent: req.body.Referent,
                     Statut: req.body.Statut
                 });
-                res.status(201).send(bibliothecaireMisAJour);
+                res.status(201).json(bibliothecaireMisAJour);
             }
             else {
-                res.status(404).send("bibliothecaire inconnu");
+                res.status(404).json({"message": "bibliothecaire inconnu"});
             }
         }
         catch (e) {
@@ -60,15 +62,16 @@ module.exports = {
     },
     async supprimerUnBibliothecaire(req, res) {
         try {
-            const biblithecaireASupprimer = await bibliothecaire.findOne(({
+            const bibliothecaireASupprimer = await bibliothecaire.findOne(({
                 where: { id: req.params.bibliothecaireId }
             }))
-            if (biblithecaireASupprimer) {
-                biblithecaireASupprimer.destroy();
-                res.status(201).send("bibliothecaire supprimé");
+            if (bibliothecaireASupprimer) {
+                bibliothecaireASupprimer.destroy();
+                console.log("pas d'erreur");
+                res.status(201).json({"message": "bibliothecaire supprimé"});
             }
             else {
-                res.status(404).send("bibliothecaire inconnu");
+                res.status(404).json({"message": "bibliothecaire inconnu"});
             }
         }
         catch (e) {
