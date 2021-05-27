@@ -4,7 +4,9 @@ const cors = require("cors");
 const app = express();
 
 const db = require("./src/models");
+// const { abonne } = require("./src/models");
 const bibliothecaire = db.bibliothecaire;
+const abonne = db.abonne;
 
 // db.sequelize.sync({ force: true });
 
@@ -51,6 +53,19 @@ function initial() {
     Referent: "false",
     Statut: "Actif"
   });
+  abonne.create({
+    Nom: "GEFFROY",
+    Prenom: "Yannick",
+    Email: "ygeffroy@gmail.com",
+    Rue: "17 rue Pierre Benoit",
+    CodePostal: "Villejuif",
+    Ville: "94800",
+    DateLimiteAbonnement: new Date("2022-05-27"),
+    Amende: 0.0,
+    PenaliteNbJours: 0,
+    CreePar: 1,
+    MisAJourPar: 1
+  });
 
 }
 
@@ -61,6 +76,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 require('./src/routes/bibliothecaire.routes')(app);
+require('./src/routes/abonnes.routes')(app);
 
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to our application." });

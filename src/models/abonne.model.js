@@ -29,6 +29,12 @@ module.exports = (sequelize, Sequelize) => {
         },
         PenaliteNbJours: {
             type: Sequelize.INTEGER
+        },
+        CreePar: {
+            type: Sequelize.INTEGER
+        },
+        MisAJourPar: {
+            type: Sequelize.INTEGER
         }
     });
     return abonne;
