@@ -41,7 +41,15 @@ function initial() {
     Email: "ntartaglia@gmail.com",
     Password: "$2a$08$lTwGFPh6NoqCs4N/fvaR0un.LLsAE.eQhfBbfzBsmTiPmwo0RpXcy",
     Referent: "true",
-    Statut: "actif"
+    Statut: "Actif"
+  });
+  bibliothecaire.create({
+    Nom: "TARTAGLIA",
+    Prenom: "Stan",
+    Email: "startaglia@gmail.com",
+    Password: "$2a$08$H4HcG4AH5Ay.IzJxyGZ2Xek6XGDc0cX2MTgB1cAvDFFjLUm1OZAC.",
+    Referent: "false",
+    Statut: "Actif"
   });
 
 }
