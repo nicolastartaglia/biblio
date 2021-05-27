@@ -25,7 +25,7 @@ module.exports = {
     async seConnecterEnTantQueBibliothecaire(req, res) {
         try {
             const unBibliothecaire = await bibliothecaire.findOne({
-                where: { Email: req.body.Email }
+                where: { Email: req.body.Email, Statut: 'Actif' } 
             });
             if (unBibliothecaire) {
                 const passwordIsValid = bcrypt.compareSync(
@@ -52,7 +52,7 @@ module.exports = {
                 });
             }
             else {
-                res.status(404).send("bibliothecaire inconnu")
+                res.status(200).json({"message": "bibliothecaire inconnu ou suspendu"});
             }
         }
         catch (e) {

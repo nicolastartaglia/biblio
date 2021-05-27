@@ -41,15 +41,26 @@ module.exports = {
                 where: { id: req.params.bibliothecaireId }
             });
             if (bibliothecaireAMettreAJour) {
-                const bibliothecaireMisAJour = await bibliothecaireAMettreAJour.update({
-                    Nom: req.body.Nom,
-                    Prenom: req.body.Prenom,
-                    Email: req.body.Email,
-                    Password: bcrypt.hashSync(req.body.Password, 8),
-                    Referent: req.body.Referent,
-                    Statut: req.body.Statut
-                });
-                res.status(201).json(bibliothecaireMisAJour);
+                if (req.body.Password !== bibliothecaireAMettreAJour.Password && req.body.Password !== ''){
+                    const bibliothecaireMisAJour = await bibliothecaireAMettreAJour.update({
+                        Nom: req.body.Nom,
+                        Prenom: req.body.Prenom,
+                        Email: req.body.Email,
+                        Password: bcrypt.hashSync(req.body.Password, 8),
+                        Referent: req.body.Referent,
+                        Statut: req.body.Statut
+                    });
+                    res.status(201).json(bibliothecaireMisAJour);
+                } else {
+                    const bibliothecaireMisAJour = await bibliothecaireAMettreAJour.update({
+                        Nom: req.body.Nom,
+                        Prenom: req.body.Prenom,
+                        Email: req.body.Email,
+                        Referent: req.body.Referent,
+                        Statut: req.body.Statut
+                    });
+                    res.status(201).json(bibliothecaireMisAJour);
+                }
             }
             else {
                 res.status(404).json({"message": "bibliothecaire inconnu"});

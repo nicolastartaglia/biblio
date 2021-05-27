@@ -10,7 +10,7 @@ module.exports = async (req, res, next) => {
         });
         console.log(unBibliothecaire);
         if (unBibliothecaire) {
-            res.status(400).send("Cet email exsite déjà!");
+            res.status(200).json({"message":"L'email saisi est attaché à un compte existant!"});
             return;
         }
         next();
