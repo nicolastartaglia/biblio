@@ -1,9 +1,37 @@
 const abonne = require("../models").abonne;
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 module.exports = {
-    async obtenirTousLesAbonnes(req, res) {
+    async obtenirQuelquesAbonnes(req, res) {
         try {
-            const collectionDAbonne = await abonne.findAll({});
+            console.log(req.body);
+            const cond1 = (req.body.Email === '') ? "$ne: ''" : "$ilike: '%'+req.body.Email+'%'" ;
+            const cond2 = (req.body.Nom === '') ? "$ne: ''" : "$ilike: '%'+req.body.Nom+'%'";
+            const cond3 = (req.body.Prenom === '') ? "$ne: ''" : "$ilike: '%'+req.body.Prenom+'%'";
+            const conditionDeRecherche = "{where: { Email: { "+cond1+"}, Nom: {"+cond2+"}, Prenom: {"+cond3*"}}}";
+            console.log(cond1, cond2, cond3);
+            // const collectionDAbonne = await abonne.findAll(conditionDeRecherche);
+            const collectionDAbonne = await abonne.findAll({
+            //     where: { 
+                       
+            //             Nom: {
+            //                 [Op.like]: '%Bob%'
+            //             }
+                       
+            //          }
+            // });
+
+                where: { 
+               
+                    Nom: {
+                        [Op.iLike]: '%'+req.body.Nom+'%'
+                    }
+                    
+                  
+                 }
+            });
+        
             if (collectionDAbonne) {
                 res.status(201).json(collectionDAbonne);
             }
