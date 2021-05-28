@@ -8,7 +8,7 @@ module.exports = {
                 res.status(201).json(collectionDAbonne);
             }
             else {
-                res.status(404).json({ "message": "Pas d'abonné" })
+                res.status(200).json({ "message": "Pas d'abonné" })
             }
         }
         catch (e) {
@@ -25,7 +25,7 @@ module.exports = {
                 res.status(201).json(unAbonne);
             }
             else {
-                res.status(404).json({ "message": "abonné inconnu" });
+                res.status(200).json({ "message": "Ce numéro d'abonné n'existe pas!" });
             }
         }
         catch (e) {
@@ -57,7 +57,7 @@ module.exports = {
 
             }
             else {
-                res.status(404).json({ "message": "abonne inconnu" });
+                res.status(200).json({ "message": "abonne inconnu" });
             }
         }
         catch (e) {
@@ -72,10 +72,10 @@ module.exports = {
             }))
             if (abonneASupprimer) {
                 abonneASupprimer.destroy();
-                res.status(201).json({ "message": "abonné supprimé" });
+                res.status(201).json({ "message": "Cet abonné a été supprimé" });
             }
             else {
-                res.status(404).json({ "message": "abonné inconnu" });
+                res.status(200).json({ "message": "abonné inconnu" });
             }
         }
         catch (e) {
