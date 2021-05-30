@@ -5,32 +5,32 @@ const Op = Sequelize.Op;
 module.exports = {
     async obtenirQuelquesAbonnes(req, res) {
         try {
-            console.log(req.body);
-            const cond1 = (req.body.Email === '') ? "$ne: ''" : "$ilike: '%'+req.body.Email+'%'" ;
-            const cond2 = (req.body.Nom === '') ? "$ne: ''" : "$ilike: '%'+req.body.Nom+'%'";
-            const cond3 = (req.body.Prenom === '') ? "$ne: ''" : "$ilike: '%'+req.body.Prenom+'%'";
-            const conditionDeRecherche = "{where: { Email: { "+cond1+"}, Nom: {"+cond2+"}, Prenom: {"+cond3*"}}}";
-            console.log(cond1, cond2, cond3);
-            // const collectionDAbonne = await abonne.findAll(conditionDeRecherche);
-            const collectionDAbonne = await abonne.findAll({
-            //     where: { 
-                       
-            //             Nom: {
-            //                 [Op.like]: '%Bob%'
-            //             }
-                       
-            //          }
-            // });
-
-                where: { 
-               
-                    Nom: {
-                        [Op.iLike]: '%'+req.body.Nom+'%'
+            const collectionDAbonne = await abonne.findAll(
+                { 
+                    where: {
+                        [Op.and]: [ 
+                            Sequelize.where(
+                                Sequelize.fn('lower', Sequelize.col('Nom')), 
+                                {
+                                    [Op.like]: '%'+req.body.Nom.toLowerCase()+'%'
+                                }
+                            ),
+                            Sequelize.where(
+                                Sequelize.fn('lower', Sequelize.col('Prenom')), 
+                                {
+                                    [Op.like]: '%'+req.body.Prenom.toLowerCase()+'%'
+                                }
+                            ),
+                            Sequelize.where(
+                                Sequelize.fn('lower', Sequelize.col('Email')), 
+                                {
+                                    [Op.like]: '%'+req.body.Email.toLowerCase()+'%'
+                                }
+                            ),
+                        ]
                     }
-                    
-                  
-                 }
-            });
+                }
+            );
         
             if (collectionDAbonne) {
                 res.status(201).json(collectionDAbonne);
@@ -67,7 +67,6 @@ module.exports = {
                 where: { id: req.params.abonneId }
             });
             if (abonneAMettreAJour) {
-
                 const abonneMisAJour = await abonneAMettreAJour.update({
                     Nom: req.body.Nom,
                     Prenom: req.body.Prenom,
