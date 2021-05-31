@@ -76,7 +76,7 @@ module.exports = {
                     Ville: req.body.Ville,
                     DateLimiteAbonnement: new Date(req.body.DateLimiteAbonnement),
                     Amende: parseFloat(req.body.Amende),
-                    PenaliteNbJours: parseInt(req.body.PenaliteNbJours),
+                    DateEmpruntPossible: new Date(req.body.PenaliteNbJours),
                     CreePar: parseInt(req.body.CreePar),
                     MisAJourPar: parseInt(req.body.MisAJourPar)
                 });
@@ -121,7 +121,7 @@ module.exports = {
                 Ville: req.body.Ville,
                 DateLimiteAbonnement: new Date(req.body.DateLimiteAbonnement),
                 Amende: req.body.Amende,
-                PenaliteNbJours: req.body.PenaliteNbJours,
+                DateEmpruntPossible: new Date(req.body.PenaliteNbJours),
                 CreePar: req.body.CreePar,
                 MisAJourPar: req.body.MisAJourPar
             });

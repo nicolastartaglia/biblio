@@ -10,23 +10,51 @@ module.exports = {
                     where: {
                         [Op.and]: [ 
                             Sequelize.where(
-                                Sequelize.fn('lower', Sequelize.col('Nom')), 
+                                Sequelize.fn('lower', Sequelize.col('TypeObjet')), 
                                 {
-                                    [Op.like]: '%'+req.body.Nom.toLowerCase()+'%'
+                                    [Op.eq]: req.body.TypeObjetRecherche.toLowerCase()
                                 }
                             ),
-                            Sequelize.where(
-                                Sequelize.fn('lower', Sequelize.col('Prenom')), 
-                                {
-                                    [Op.like]: '%'+req.body.Prenom.toLowerCase()+'%'
-                                }
-                            ),
-                            Sequelize.where(
-                                Sequelize.fn('lower', Sequelize.col('Email')), 
-                                {
-                                    [Op.like]: '%'+req.body.Email.toLowerCase()+'%'
-                                }
-                            ),
+                            { 
+                                [Op.or]: [
+                                    Sequelize.where(
+                                        Sequelize.fn('lower', Sequelize.col('Titre')), 
+                                        {
+                                            [Op.like]: '%'+req.body.TitreRecherche.toLowerCase()+'%'
+                                        }
+                                    ),
+                                    Sequelize.where(
+                                        Sequelize.fn('lower', Sequelize.col('AuteurScenariste')), 
+                                        {
+                                            [Op.like]: '%'+req.body.AuteurArtisteRecherche.toLowerCase()+'%'
+                                        }
+                                    ),
+                                    Sequelize.where(
+                                        Sequelize.fn('lower', Sequelize.col('Realisateur')), 
+                                        {
+                                            [Op.like]: '%'+req.body.AuteurArtisteRecherche.toLowerCase()+'%'
+                                        }
+                                    ),
+                                    Sequelize.where(
+                                        Sequelize.fn('lower', Sequelize.col('Scenariste')), 
+                                        {
+                                            [Op.like]: '%'+req.body.AuteurArtisteRecherche.toLowerCase()+'%'
+                                        }
+                                    ),
+                                    Sequelize.where(
+                                        Sequelize.fn('lower', Sequelize.col('Dessinateur')), 
+                                        {
+                                            [Op.like]: '%'+req.body.AuteurArtisteRecherche.toLowerCase()+'%'
+                                        }
+                                    ),
+                                    Sequelize.where(
+                                        Sequelize.fn('lower', Sequelize.col('Artiste')), 
+                                        {
+                                            [Op.like]: '%'+req.body.AuteurArtisteRecherche.toLowerCase()+'%'
+                                        }
+                                    )
+                                ]
+                            }
                         ]
                     }
                 }

@@ -63,7 +63,7 @@ function initial() {
     Ville: "94800",
     DateLimiteAbonnement: new Date("2022-05-27"),
     Amende: 0.0,
-    PenaliteNbJours: 0,
+    DateEmpruntPossible: new Date(),
     CreePar: 1,
     MisAJourPar: 1
   });
@@ -76,7 +76,7 @@ function initial() {
     Ville: "94800",
     DateLimiteAbonnement: new Date("2022-05-27"),
     Amende: 0.0,
-    PenaliteNbJours: 0,
+    DateEmpruntPossible: new Date(),
     CreePar: 1,
     MisAJourPar: 1
   });

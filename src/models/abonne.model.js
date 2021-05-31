@@ -27,8 +27,8 @@ module.exports = (sequelize, Sequelize) => {
         Amende: {
             type: Sequelize.FLOAT
         },
-        PenaliteNbJours: {
-            type: Sequelize.INTEGER
+        DateEmpruntPossible: {
+            type: Sequelize.DATE
         },
         CreePar: {
             type: Sequelize.INTEGER
