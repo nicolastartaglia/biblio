@@ -54,10 +54,16 @@ module.exports = (sequelize, Sequelize) => {
         Reserve :{
             type: Sequelize.STRING
         },
+        DateReservation: {
+            type: Sequelize.DATE
+        },
         TypeObjet :{
             type: Sequelize.STRING
         },
         empruntId:{
+            type: Sequelize.INTEGER
+        },
+        ReservePar :{
             type: Sequelize.INTEGER
         },
         CreePar :{

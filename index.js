@@ -4,6 +4,7 @@ const cors = require("cors");
 const app = express();
 
 const db = require("./src/models");
+const { emprunt } = require("./src/models");
 // const { abonne } = require("./src/models");
 const bibliothecaire = db.bibliothecaire;
 const abonne = db.abonne;
@@ -66,6 +67,23 @@ function initial() {
     CreePar: 1,
     MisAJourPar: 1
   });
+  abonne.create({
+    Nom: "DUPOND",
+    Prenom: "Pascal",
+    Email: "pdupond@gmail.com",
+    Rue: "25 rue Pierre Benoit",
+    CodePostal: "Villejuif",
+    Ville: "94800",
+    DateLimiteAbonnement: new Date("2022-05-27"),
+    Amende: 0.0,
+    PenaliteNbJours: 0,
+    CreePar: 1,
+    MisAJourPar: 1
+  });
+  emprunt.create({
+    DateRetourLimite: new Date(),
+    Statut: "Terminé"
+  });
 
 }
 
@@ -77,6 +95,7 @@ app.use(express.urlencoded());
 
 require('./src/routes/bibliothecaire.routes')(app);
 require('./src/routes/abonnes.routes')(app);
+require('./src/routes/objets.routes')(app);
 
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to our application." });

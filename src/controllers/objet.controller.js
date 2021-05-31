@@ -86,10 +86,12 @@ module.exports = {
                     Code3C: req.body.Code3C,
                     Etat: req.body.Etat,
                     Reserve: req.body.Reserve,
+                    DateReservation: new Date(req.body.DateReservation),
                     TypeObjet: req.body.TypeObjet,
-                    empruntId: req.body.empruntId,
-                    CreePar: req.body.CreePar,
-                    MisAJourPar: req.body.MisAJourPar
+                    empruntId: parseInt(req.body.empruntId),
+                    reservePar: parseInt(req.body.reservePar),
+                    CreePar: parseInt(req.body.CreePar),
+                    MisAJourPar: parseInt(req.body.MisAJourPar)
                 });
                 res.status(201).json(objetMisAJour);
 
@@ -123,6 +125,7 @@ module.exports = {
     },
     async ajouterUnObjet(req, res) {
         try {
+            console.log("ajout");
             const unNouvelObjet = await objet.create({
                 Titre: req.body.Titre,
                 AuteurScenariste: req.body.AuteurScenariste,
@@ -142,10 +145,12 @@ module.exports = {
                 Code3C: req.body.Code3C,
                 Etat: req.body.Etat,
                 Reserve: req.body.Reserve,
+                DateReservation: new Date(req.body.DateReservation),
                 TypeObjet: req.body.TypeObjet,
-                empruntId: req.body.empruntId,
-                CreePar: req.body.CreePar,
-                MisAJourPar: req.body.MisAJourPar
+                empruntId: parseInt(req.body.empruntId),
+                reservePar: parseInt(req.body.reservePar),
+                CreePar: parseInt(req.body.CreePar),
+                MisAJourPar: parseInt(req.body.MisAJourPar)
             });
             res.status(201).json(unNouvelObjet);
         }

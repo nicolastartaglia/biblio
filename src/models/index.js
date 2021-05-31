@@ -44,6 +44,9 @@ db.objet.belongsTo(db.bibliothecaire, {
 db.objet.belongsTo(db.bibliothecaire, {
     foreignKey: "MisAJourPar"
 });
+db.objet.belongsTo(db.abonne, {
+    foreignKey: "ReservePar"
+});
 
 db.emprunt.belongsTo(db.bibliothecaire, {
     foreignKey: "EmpruntEnregistrePar"
