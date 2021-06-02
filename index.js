@@ -96,6 +96,7 @@ app.use(express.urlencoded());
 require('./src/routes/bibliothecaire.routes')(app);
 require('./src/routes/abonnes.routes')(app);
 require('./src/routes/objets.routes')(app);
+require('./src/routes/emprunts.routes')(app);
 
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to our application." });

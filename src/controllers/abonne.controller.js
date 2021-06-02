@@ -1,4 +1,5 @@
 const abonne = require("../models").abonne;
+const emprunt = require("../models").emprunt;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
@@ -76,7 +77,7 @@ module.exports = {
                     Ville: req.body.Ville,
                     DateLimiteAbonnement: new Date(req.body.DateLimiteAbonnement),
                     Amende: parseFloat(req.body.Amende),
-                    DateEmpruntPossible: new Date(req.body.PenaliteNbJours),
+                    DateEmpruntPossible: new Date(req.body.DateEmpruntPossible),
                     CreePar: parseInt(req.body.CreePar),
                     MisAJourPar: parseInt(req.body.MisAJourPar)
                 });
@@ -121,10 +122,37 @@ module.exports = {
                 Ville: req.body.Ville,
                 DateLimiteAbonnement: new Date(req.body.DateLimiteAbonnement),
                 Amende: req.body.Amende,
-                DateEmpruntPossible: new Date(req.body.PenaliteNbJours),
+                DateEmpruntPossible: new Date(req.body.DateEmpruntPossible),
                 CreePar: req.body.CreePar,
                 MisAJourPar: req.body.MisAJourPar
             });
+            console.log(unNouvelAbonne);
+            res.status(201).json(unNouvelAbonne);
+        }
+        catch (e) {
+            console.log(e);
+            res.status(400).send(e);
+        }
+    },
+    async obtenirLeDernierEmpruntDunAbonne(req, res) {
+        try {
+            const abonneRecherche = await abonne.findOne({
+                    where: { id: req.params.abonneId }
+            });
+            if (abonneRecherche) {
+                const LeDernierEmpruntDUnAbonne = await emprunt.findOne({
+                    where: { abonneId: abonneRecherche.id, Statut: "Ouvert" }
+                });
+                if (LeDernierEmpruntDUnAbonne) {
+                    res.status(201).json(LeDernierEmpruntDUnAbonne);
+                } else {
+                    res.status(201).json({"message": "Pas d'emprunt en cours pour cet abonné"});
+                }
+            }
+            else {
+                res.status(200).json({ "message": "abonne inconnu" });
+            }
+            console.log(unNouvelAbonne);
             res.status(201).json(unNouvelAbonne);
         }
         catch (e) {

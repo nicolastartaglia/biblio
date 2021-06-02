@@ -7,4 +7,5 @@ module.exports = function (app) {
     app.delete("/abonne/:abonneId", middlewareVerification.verifierPresenceJeton, controllerAbonne.supprimerUnAbonne);
     app.post("/abonne", middlewareVerification.verifierPresenceJeton, controllerAbonne.ajouterUnAbonne);
     app.post("/abonne/recherche", middlewareVerification.verifierPresenceJeton, controllerAbonne.obtenirQuelquesAbonnes);
+    app.get("/abonne/emprunt/:abonneId", controllerAbonne.obtenirLeDernierEmpruntDunAbonne);
 };
