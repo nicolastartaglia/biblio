@@ -159,6 +159,48 @@ module.exports = {
             console.log(e);
             res.status(400).send(e);
         }
+    },
+    async payerLAmende(req, res) {
+        try {
+            const abonneAMettreAJour = await abonne.findOne({
+                where: { id: req.params.abonneId }
+            });
+            if (abonneAMettreAJour) {
+                const abonneMisAJour = await abonneAMettreAJour.update({
+                    Amende: 0.0
+                });
+                res.status(201).json(abonneMisAJour);
+            }
+            else {
+                res.status(200).json({ "message": "abonne inconnu" });
+            }
+        }
+        catch (e) {
+            console.log(e);
+            res.status(400).send(e);
+        }
+    },
+    async renouvelerAbonnement(req, res) {
+        try {
+            const abonneAMettreAJour = await abonne.findOne({
+                where: { id: req.params.abonneId }
+            });
+            if (abonneAMettreAJour) {
+                const abonneMisAJour = await abonneAMettreAJour.update({
+                    DateLimiteAbonnement: new Date((new Date()).setDate((new Date()).getDate() + 365))
+                  
+                });
+                console.log(abonneMisAJour);
+                res.status(201).json(abonneMisAJour);
+            }
+            else {
+                res.status(200).json({ "message": "abonne inconnu" });
+            }
+        }
+        catch (e) {
+            console.log(e);
+            res.status(400).send(e);
+        }
     }
 
 }

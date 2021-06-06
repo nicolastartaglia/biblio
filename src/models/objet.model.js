@@ -22,7 +22,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER
         },
         Description :{
-            type: Sequelize.STRING
+            type: Sequelize.TEXT
         },
         Edition :{
             type: Sequelize.STRING
