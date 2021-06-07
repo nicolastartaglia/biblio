@@ -1,4 +1,5 @@
 const objet = require("../models").objet;
+const emprunt = require("../models").emprunt;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
@@ -79,6 +80,33 @@ module.exports = {
             });
             if (unObjet) {
                 res.status(201).json(unObjet);
+            }
+            else {
+                res.status(200).json({ "message": "Ce numéro d'objet n'existe pas!" });
+            }
+        }
+        catch (e) {
+            console.log(e);
+            res.status(500).send(e);
+        }
+    },
+    async obtenirUnObjetAEmprunter(req, res) {
+        try {
+            const unObjet = await objet.findOne({
+                where: { id: req.body.objetId }
+            });
+            if (unObjet) {
+                if(unObjet.empruntId == 1){
+                    if(unObjet.reservePar != 1){
+                        if(Math.ceil((new Date() - unObjet.DateReservation) / (1000 * 60 * 60 * 24)) > parserInt(req.body.dureeReservation)) {
+                            res.status(201).json(unObjet);
+                        } else {
+                            res.status(200).json({ "message": "Cet objet a été réservé" });
+                        }
+                    }
+                } else {
+                    res.status(200).json({ "message": "Cet objet a été emprunté" });
+                }
             }
             else {
                 res.status(200).json({ "message": "Ce numéro d'objet n'existe pas!" });
@@ -187,5 +215,5 @@ module.exports = {
             res.status(400).send(e);
         }
     }
-
+    
 }

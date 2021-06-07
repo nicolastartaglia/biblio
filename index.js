@@ -4,7 +4,7 @@ const cors = require("cors");
 const app = express();
 
 const db = require("./src/models");
-const { emprunt } = require("./src/models");
+const { emprunt, objet } = require("./src/models");
 // const { abonne } = require("./src/models");
 const bibliothecaire = db.bibliothecaire;
 const abonne = db.abonne;
@@ -84,6 +84,60 @@ function initial() {
     DateRetourLimite: new Date(),
     Statut: "Terminé"
   });
+  objet.create({
+    Titre: "Le rouge et le noir",
+    AuteurScenariste: "Stendhal",
+    Realisateur: "",
+    Scenariste: "",
+    Genre: "roman",
+    Annee: "2019",
+    Duree: 0,
+    Description: "",
+    Edition: "Belin et Gallimard",
+    Pages: 640,
+    Dessinateur: "",
+    Artiste: "",
+    Zone: "ET1",
+    Travee: "B",
+    EtagereBac: "201",
+    Code3C: "STE",
+    Etat: "",
+    Reserve: "",
+    DateReservation: "2020-01-01T00:00:00.000Z",
+    TypeObjet: "ecrit",
+    empruntId: 1,
+    ReservePar: null
+    // CreePar: 1,
+    // MisAJourPar: 1
+  });
+ 
+  objet.create({
+    Titre: "Germinal",
+    AuteurScenariste: "Émile ZOLA",
+    Realisateur: "",
+    Scenariste: "",
+    Genre: "roman",
+    Annee: "2018",
+    Duree: 0,
+    Description: "",
+    Edition: "Atlantic",
+    Pages: 480,
+    Dessinateur: "",
+    Artiste: "",
+    Zone: "ET2",
+    Travee: "D",
+    EtagereBac: "101",
+    Code3C: "ZOL",
+    Etat: "",
+    Reserve: "",
+    DateReservation: "2020-01-01T00:00:00.000Z",
+    TypeObjet: "ecrit",
+    empruntId: 1,
+    ReservePar: null
+    // CreePar: 1,
+    // MisAJourPar: 1
+  });
+  
 
 }
 

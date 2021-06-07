@@ -152,8 +152,6 @@ module.exports = {
             else {
                 res.status(200).json({ "message": "abonne inconnu" });
             }
-            console.log(unNouvelAbonne);
-            res.status(201).json(unNouvelAbonne);
         }
         catch (e) {
             console.log(e);

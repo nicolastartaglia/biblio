@@ -45,7 +45,7 @@ module.exports = (sequelize, Sequelize) => {
         EtagereBac :{
             type: Sequelize.STRING
         },
-        Code3c :{
+        Code3C :{
             type: Sequelize.STRING
         },
         Etat :{
