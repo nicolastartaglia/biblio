@@ -64,8 +64,8 @@ function initial() {
     DateLimiteAbonnement: new Date("2022-05-27"),
     Amende: 0.0,
     DateEmpruntPossible: new Date(),
-    CreePar: 1,
-    MisAJourPar: 1
+  //  CreePar: 1,
+  //  MisAJourPar: 1
   });
   abonne.create({
     Nom: "DUPOND",
@@ -77,8 +77,8 @@ function initial() {
     DateLimiteAbonnement: new Date("2022-05-27"),
     Amende: 0.0,
     DateEmpruntPossible: new Date(),
-    CreePar: 1,
-    MisAJourPar: 1
+ //   CreePar: 1,
+ //   MisAJourPar: 1
   });
   emprunt.create({
     DateRetourLimite: new Date(),
@@ -105,7 +105,7 @@ function initial() {
     Reserve: "",
     DateReservation: "2020-01-01T00:00:00.000Z",
     TypeObjet: "ecrit",
-    empruntId: 1,
+    empruntId: null,
     ReservePar: null
     // CreePar: 1,
     // MisAJourPar: 1
@@ -132,7 +132,7 @@ function initial() {
     Reserve: "",
     DateReservation: "2020-01-01T00:00:00.000Z",
     TypeObjet: "ecrit",
-    empruntId: 1,
+    empruntId: null,
     ReservePar: null
     // CreePar: 1,
     // MisAJourPar: 1

@@ -96,13 +96,18 @@ module.exports = {
                 where: { id: req.body.objetId }
             });
             if (unObjet) {
-                if(unObjet.empruntId == 1){
-                    if(unObjet.reservePar != 1){
-                        if(Math.ceil((new Date() - unObjet.DateReservation) / (1000 * 60 * 60 * 24)) > parserInt(req.body.dureeReservation)) {
+                if(unObjet.empruntId == null){
+                    if(unObjet.ReservePar !== null){
+                        const diffDate = Math.ceil((new Date() - unObjet.DateReservation) / (1000 * 60 * 60 * 24));
+                        if(diffDate > parseInt(req.body.dureeReservation)) {
+                            res.status(201).json(unObjet);
+                        } else if (unObjet.ReservePar === parseInt(req.body.abonneId)) {
                             res.status(201).json(unObjet);
                         } else {
                             res.status(200).json({ "message": "Cet objet a été réservé" });
                         }
+                    } else {
+                        res.status(201).json(unObjet);
                     }
                 } else {
                     res.status(200).json({ "message": "Cet objet a été emprunté" });
@@ -203,8 +208,8 @@ module.exports = {
                 Reserve: req.body.Reserve,
                 DateReservation: new Date(req.body.DateReservation),
                 TypeObjet: req.body.TypeObjet,
-                empruntId: parseInt(req.body.empruntId),
-                reservePar: parseInt(req.body.reservePar),
+                empruntId: null,
+                reservePar: null,
                 CreePar: parseInt(req.body.CreePar),
                 MisAJourPar: parseInt(req.body.MisAJourPar)
             });
