@@ -5,4 +5,7 @@ module.exports = function (app) {
  //   app.get("/emprunt/:empruntId", controllerEmprunt.obtenirUnEmprunt);
  //   app.put("/emprunt/:empruntId", controllerEmprunt.mettreAJourUnEmprunt);
     app.post("/emprunt", controllerEmprunt.emprunterDesObjets);
+    app.post("/emprunt/retour", controllerEmprunt.retournerDesObjets);
+    app.get("/emprunt/:empruntId", controllerEmprunt.obtenirLaListeDesObjetsEmpruntes);
+
 };

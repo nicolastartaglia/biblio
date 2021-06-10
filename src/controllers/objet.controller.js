@@ -99,6 +99,8 @@ module.exports = {
                 if(unObjet.empruntId == null){
                     if(unObjet.ReservePar !== null){
                         const diffDate = Math.ceil((new Date() - unObjet.DateReservation) / (1000 * 60 * 60 * 24));
+                        console.log("Diffdate");
+                        console.log(diffDate);
                         if(diffDate > parseInt(req.body.dureeReservation)) {
                             res.status(201).json(unObjet);
                         } else if (unObjet.ReservePar === parseInt(req.body.abonneId)) {

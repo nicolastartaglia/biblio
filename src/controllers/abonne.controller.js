@@ -32,7 +32,6 @@ module.exports = {
                     }
                 }
             );
-        
             if (collectionDAbonne) {
                 res.status(201).json(collectionDAbonne);
             }
@@ -82,7 +81,6 @@ module.exports = {
                     MisAJourPar: parseInt(req.body.MisAJourPar)
                 });
                 res.status(201).json(abonneMisAJour);
-
             }
             else {
                 res.status(200).json({ "message": "abonne inconnu" });

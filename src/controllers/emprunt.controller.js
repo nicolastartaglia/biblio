@@ -105,6 +105,51 @@ module.exports = {
             console.log(e);
             res.status(400).send(e);
         }
+    },
+    async obtenirLaListeDesObjetsEmpruntes(req, res) {
+        try {
+            const objetsEmpruntes = await objet.findAll({
+                where: {
+                    empruntId: req.params.empruntId
+                }
+            });
+            if (objetsEmpruntes) {
+                res.status(201).json(objetsEmpruntes);
+            }
+            else {
+                res.status(200).json({ "message": "Pas d'objet emprunté" });
+            }
+        }
+        catch (e) {
+            console.log(e);
+            res.status(400).send(e);
+        }
+    },
+    async retournerDesObjets(req, res) {
+        try {
+            const objetsRetournes = await objet.findAll({
+                where: {
+                    id: {
+                            [Op.in]: req.body.objetsRetournes
+                    }
+                }
+            });
+            if (objetsRetournes) {
+                const unEmpruntAMettreAJour = await emprunt.update({
+                    DateRetour: new Date(),
+                    Statut: "Terminé",
+                    RetourEnregistrePar: parseInt(req.body.bibliothecaireId)
+                }, { where : { id : req.body.empruntId }});
+                const objetsEmpruntesAMettreAJour = await objet.update({ empruntId : null },{ where : { id : req.body.objetsRetournes }}); 
+                res.status(201).json({"message": "Retour enregistré"});
+            } else {
+                res.status(201).json({ "message": "Emprunt non enregistré"});
+            } 
+        }
+        catch (e) {
+            console.log(e);
+            res.status(400).send(e);
+        }
     }
 
 }
