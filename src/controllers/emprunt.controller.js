@@ -1,72 +1,10 @@
 const emprunt = require("../models").emprunt;
 const objet = require("../models").objet;
+const abonne = require("../models").abonne;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 module.exports = {
-    // async obtenirUnEmprunt(req, res) {
-    //     try {
-    //         const unEmprunt = await emprunt.findOne({
-    //             where: { id: req.params.empruntId }
-    //         });
-    //         if (unEmprunt) {
-    //             res.status(201).json(unEmprunt);
-    //         }
-    //         else {
-    //             res.status(200).json({ "message": "Ce numéro d'emprunt n'existe pas!" });
-    //         }
-    //     }
-    //     catch (e) {
-    //         console.log(e);
-    //         res.status(500).send(e);
-    //     }
-    // },
-    // async mettreAJourUnEmprunt(req, res) {
-    //     try {
-    //         const empruntAMettreAJour = await emprunt.findOne({
-    //             where: { id: req.params.empruntId }
-    //         });
-    //         if (empruntAMettreAJour) {
-    //             const empruntMisAJour = await empruntAMettreAJour.update({
-    //                 DateEmprunt: new Date(req.body.DateEmprunt),
-    //                 DateRetour: new Date(req.body.DateRetour),
-    //                 DateRetourLimite: new Date(DateRetourLimite),
-    //                 Statut: req.body.Statut,
-    //                 abonneId: req.body.abonneId,
-    //                 EmpruntEnregistrePar: req.body.EmpruntEnregistrePar,
-    //                 RetourEnregistrePar: req.body.RetourEnregistrePar
-    //             });
-    //             res.status(201).json(empruntMisAJour);
-
-    //         }
-    //         else {
-    //             res.status(200).json({ "message": "emprunt inconnu" });
-    //         }
-    //     }
-    //     catch (e) {
-    //         console.log(e);
-    //         res.status(400).send(e);
-    //     }
-    // },
-    // async ajouterUnEmprunt(req, res) {
-    //     try {
-    //         console.log("ajout");
-    //         const unNouvelEmprunt = await emprunt.create({
-    //             DateEmprunt: new Date(req.body.DateEmprunt),
-    //             DateRetour: new Date(req.body.DateRetour),
-    //             DateRetourLimite: new Date(DateRetourLimite),
-    //             Statut: req.body.Statut,
-    //             abonneId: req.body.abonneId,
-    //             EmpruntEnregistrePar: req.body.EmpruntEnregistrePar,
-    //             RetourEnregistrePar: req.body.RetourEnregistrePar
-    //         });
-    //         res.status(201).json(unNouvelEmprunt);
-    //     }
-    //     catch (e) {
-    //         console.log(e);
-    //         res.status(400).send(e);
-    //     }
-    // },
     async emprunterDesObjets(req,res) {
         try {
             console.log("données transmises");
@@ -127,29 +65,31 @@ module.exports = {
     },
     async retournerDesObjets(req, res) {
         try {
-            const objetsRetournes = await objet.findAll({
-                where: {
-                    id: {
-                            [Op.in]: req.body.objetsRetournes
-                    }
+            console.log(req.body);
+            const empruntAMettreAJour = await emprunt.update({
+                DateRetour: new Date(),
+                Statut: "Terminé",
+                RetourEnregistrePar: req.body.bibliothecaireId
+            }, { where : { id : req.body.empruntId }});
+            if(empruntAMettreAJour){
+                const abonneAMettreAJour = await abonne.update({
+                    Amende: req.body.Amende
+                }, { where: { id: req.body.abonneId }});
+                if(abonneAMettreAJour){
+                    req.body.objetsRetournes.forEach(async (element) => {
+                        const objetAMettreAJour = await objet.update({ empruntId: null, Etat: element.Etat }, { where: { id: element.id }});
+                    });
+                    res.status(201).json({"message": "Retour enregistré"});
+                } else {
+                    res.status(201).json({"message": "Abonné et objets non mis à jour"});
                 }
-            });
-            if (objetsRetournes) {
-                const unEmpruntAMettreAJour = await emprunt.update({
-                    DateRetour: new Date(),
-                    Statut: "Terminé",
-                    RetourEnregistrePar: parseInt(req.body.bibliothecaireId)
-                }, { where : { id : req.body.empruntId }});
-                const objetsEmpruntesAMettreAJour = await objet.update({ empruntId : null },{ where : { id : req.body.objetsRetournes }}); 
-                res.status(201).json({"message": "Retour enregistré"});
             } else {
-                res.status(201).json({ "message": "Emprunt non enregistré"});
-            } 
+                res.status(201).json({ "message": "Retour non enregistré"});
+            }
         }
         catch (e) {
-            console.log(e);
-            res.status(400).send(e);
+                console.log(e);
+                res.status(400).send(e);
         }
     }
-
 }

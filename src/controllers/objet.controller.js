@@ -21,37 +21,37 @@ module.exports = {
                                     Sequelize.where(
                                         Sequelize.fn('lower', Sequelize.col('Titre')), 
                                         {
-                                            [Op.like]: '%'+req.body.TitreRecherche.toLowerCase()+'%'
+                                            [Op.like]: '%'+(req.body.TitreRecherche.toLowerCase() != '' ? req.body.TitreRecherche.toLowerCase() : 'zzzzzzzzzzz') +'%'
                                         }
                                     ),
                                     Sequelize.where(
                                         Sequelize.fn('lower', Sequelize.col('AuteurScenariste')), 
                                         {
-                                            [Op.like]: '%'+req.body.AuteurArtisteRecherche.toLowerCase()+'%'
+                                            [Op.like]: '%'+(req.body.AuteurArtisteRecherche.toLowerCase() != '' ? req.body.AuteurArtisteRecherche.toLowerCase() : 'zzzzzzzzzzz') +'%'
                                         }
                                     ),
                                     Sequelize.where(
                                         Sequelize.fn('lower', Sequelize.col('Realisateur')), 
                                         {
-                                            [Op.like]: '%'+req.body.AuteurArtisteRecherche.toLowerCase()+'%'
+                                            [Op.like]: '%'+(req.body.AuteurArtisteRecherche.toLowerCase() != '' ? req.body.AuteurArtisteRecherche.toLowerCase() : 'zzzzzzzzzzz') +'%'
                                         }
                                     ),
                                     Sequelize.where(
                                         Sequelize.fn('lower', Sequelize.col('Scenariste')), 
                                         {
-                                            [Op.like]: '%'+req.body.AuteurArtisteRecherche.toLowerCase()+'%'
+                                            [Op.like]: '%'+(req.body.AuteurArtisteRecherche.toLowerCase() != '' ? req.body.AuteurArtisteRecherche.toLowerCase() : 'zzzzzzzzzzz') +'%'
                                         }
                                     ),
                                     Sequelize.where(
                                         Sequelize.fn('lower', Sequelize.col('Dessinateur')), 
                                         {
-                                            [Op.like]: '%'+req.body.AuteurArtisteRecherche.toLowerCase()+'%'
+                                            [Op.like]: '%'+(req.body.AuteurArtisteRecherche.toLowerCase() != '' ? req.body.AuteurArtisteRecherche.toLowerCase() : 'zzzzzzzzzzz') +'%'
                                         }
                                     ),
                                     Sequelize.where(
                                         Sequelize.fn('lower', Sequelize.col('Artiste')), 
                                         {
-                                            [Op.like]: '%'+req.body.AuteurArtisteRecherche.toLowerCase()+'%'
+                                            [Op.like]: '%'+(req.body.AuteurArtisteRecherche.toLowerCase() != '' ? req.body.AuteurArtisteRecherche.toLowerCase() : 'zzzzzzzzzzz') +'%'
                                         }
                                     )
                                 ]
@@ -65,7 +65,7 @@ module.exports = {
                 res.status(201).json(collectionDObjet);
             }
             else {
-                res.status(200).json({ "message": "Pas d'objet" })
+                res.status(200).json({ "message": "Aucun objet trouvé" })
             }
         }
         catch (e) {
