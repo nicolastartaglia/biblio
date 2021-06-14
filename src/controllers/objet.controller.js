@@ -99,8 +99,6 @@ module.exports = {
                 if(unObjet.empruntId == null){
                     if(unObjet.ReservePar !== null){
                         const diffDate = Math.ceil((new Date() - unObjet.DateReservation) / (1000 * 60 * 60 * 24));
-                        console.log("Diffdate");
-                        console.log(diffDate);
                         if(diffDate > parseInt(req.body.dureeReservation)) {
                             res.status(201).json(unObjet);
                         } else if (unObjet.ReservePar === parseInt(req.body.abonneId)) {
@@ -148,11 +146,9 @@ module.exports = {
                     EtagereBac:req.body.EtagereBac,
                     Code3C: req.body.Code3C,
                     Etat: req.body.Etat,
-                    Reserve: req.body.Reserve,
-                    DateReservation: new Date(req.body.DateReservation),
+                //    Reserve: req.body.Reserve,
+                //    DateReservation: new Date(req.body.DateReservation),
                     TypeObjet: req.body.TypeObjet,
-                    empruntId: parseInt(req.body.empruntId),
-                    reservePar: parseInt(req.body.reservePar),
                     CreePar: parseInt(req.body.CreePar),
                     MisAJourPar: parseInt(req.body.MisAJourPar)
                 });
@@ -188,7 +184,6 @@ module.exports = {
     },
     async ajouterUnObjet(req, res) {
         try {
-            console.log("ajout");
             const unNouvelObjet = await objet.create({
                 Titre: req.body.Titre,
                 AuteurScenariste: req.body.AuteurScenariste,
@@ -207,8 +202,7 @@ module.exports = {
                 EtagereBac:req.body.EtagereBac,
                 Code3C: req.body.Code3C,
                 Etat: req.body.Etat,
-                Reserve: req.body.Reserve,
-                DateReservation: new Date(req.body.DateReservation),
+           //     DateReservation: new Date(req.body.DateReservation),
                 TypeObjet: req.body.TypeObjet,
                 empruntId: null,
                 reservePar: null,
@@ -216,6 +210,26 @@ module.exports = {
                 MisAJourPar: parseInt(req.body.MisAJourPar)
             });
             res.status(201).json(unNouvelObjet);
+        }
+        catch (e) {
+            console.log(e);
+            res.status(400).send(e);
+        }
+    },
+    async reserverUnObjet(req, res) {
+        try {
+            const objetAReserver = await objet.findOne(({
+                where: { id: req.body.objetId }
+            }))
+            if (objetAReserver) {
+                console.log("donnees");
+                console.log(req.body);
+                const objetReserve = await objetAReserver.update({ ReservePar: req.body.ReservePar, DateReservation: new Date() });
+                res.status(201).json({ "message": "Cet objet a été réservé" });
+            }
+            else {
+                res.status(200).json({ "message": "objet inconnu" });
+            }
         }
         catch (e) {
             console.log(e);

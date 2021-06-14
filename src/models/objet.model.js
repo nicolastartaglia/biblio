@@ -51,11 +51,9 @@ module.exports = (sequelize, Sequelize) => {
         Etat :{
             type: Sequelize.STRING
         },
-        Reserve :{
-            type: Sequelize.STRING
-        },
         DateReservation: {
-            type: Sequelize.DATE
+            type: Sequelize.DATE,
+            defaultValue: new Date("2020-01-01")
         },
         TypeObjet :{
             type: Sequelize.STRING

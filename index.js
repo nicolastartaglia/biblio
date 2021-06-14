@@ -4,10 +4,12 @@ const cors = require("cors");
 const app = express();
 
 const db = require("./src/models");
-const { emprunt, objet } = require("./src/models");
+const { emprunt, objet, bibliothecaire, abonne } = require("./src/models");
 // const { abonne } = require("./src/models");
-const bibliothecaire = db.bibliothecaire;
-const abonne = db.abonne;
+// const bibliothecaire = db.bibliothecaire;
+// const abonne = db.abonne;
+// const objet = db.objet;
+// const emprunt = db.emprunt;
 
 // db.sequelize.sync({ force: true });
 
@@ -54,6 +56,7 @@ function initial() {
     Referent: "false",
     Statut: "Actif"
   });
+ 
   abonne.create({
     Nom: "GEFFROY",
     Prenom: "Yannick",
@@ -64,8 +67,8 @@ function initial() {
     DateLimiteAbonnement: new Date("2022-05-27"),
     Amende: 0.0,
     DateEmpruntPossible: new Date(),
-  //  CreePar: 1,
-  //  MisAJourPar: 1
+    CreePar: 1,
+    MisAJourPar: 1
   });
   abonne.create({
     Nom: "DUPOND",
@@ -77,13 +80,15 @@ function initial() {
     DateLimiteAbonnement: new Date("2022-05-27"),
     Amende: 0.0,
     DateEmpruntPossible: new Date(),
- //   CreePar: 1,
- //   MisAJourPar: 1
+    CreePar: 1,
+    MisAJourPar: 1
   });
+
   emprunt.create({
     DateRetourLimite: new Date(),
     Statut: "Terminé"
   });
+  
   objet.create({
     Titre: "Le rouge et le noir",
     AuteurScenariste: "Stendhal",
@@ -102,41 +107,37 @@ function initial() {
     EtagereBac: "201",
     Code3C: "STE",
     Etat: "",
-    Reserve: "",
-    DateReservation: "2020-01-01T00:00:00.000Z",
     TypeObjet: "ecrit",
     empruntId: null,
-    ReservePar: null
-    // CreePar: 1,
-    // MisAJourPar: 1
+    ReservePar: null,
+    CreePar: 2, 
+    MisAJourPar: 2
   });
  
-  objet.create({
-    Titre: "Germinal",
-    AuteurScenariste: "Émile ZOLA",
-    Realisateur: "",
-    Scenariste: "",
-    Genre: "roman",
-    Annee: "2018",
-    Duree: 0,
-    Description: "",
-    Edition: "Atlantic",
-    Pages: 480,
-    Dessinateur: "",
-    Artiste: "",
-    Zone: "ET2",
-    Travee: "D",
-    EtagereBac: "101",
-    Code3C: "ZOL",
-    Etat: "",
-    Reserve: "",
-    DateReservation: "2020-01-01T00:00:00.000Z",
-    TypeObjet: "ecrit",
-    empruntId: null,
-    ReservePar: null
-    // CreePar: 1,
-    // MisAJourPar: 1
-  });
+  // objet.create({
+  //   Titre: "Germinal",
+  //   AuteurScenariste: "Émile ZOLA",
+  //   Realisateur: "",
+  //   Scenariste: "",
+  //   Genre: "roman",
+  //   Annee: "2018",
+  //   Duree: 0,
+  //   Description: "",
+  //   Edition: "Atlantic",
+  //   Pages: 480,
+  //   Dessinateur: "",
+  //   Artiste: "",
+  //   Zone: "ET2",
+  //   Travee: "D",
+  //   EtagereBac: "101",
+  //   Code3C: "ZOL",
+  //   Etat: "",
+  //   TypeObjet: "ecrit",
+  //   empruntId: null,
+  //   ReservePar: null,
+  //   CreePar: 2,
+  //   MisAJourPar: 2
+  // });
   
 
 }

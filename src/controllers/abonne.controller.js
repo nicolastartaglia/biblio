@@ -67,6 +67,8 @@ module.exports = {
                 where: { id: req.params.abonneId }
             });
             if (abonneAMettreAJour) {
+                console.log("mettre à jour");
+                console.log(req.body);
                 const abonneMisAJour = await abonneAMettreAJour.update({
                     Nom: req.body.Nom,
                     Prenom: req.body.Prenom,
