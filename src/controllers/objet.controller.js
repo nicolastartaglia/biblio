@@ -1,5 +1,5 @@
 const objet = require("../models").objet;
-const emprunt = require("../models").emprunt;
+const commentaire = require("../models").commentaire;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
@@ -229,6 +229,25 @@ module.exports = {
             }
             else {
                 res.status(200).json({ "message": "objet inconnu" });
+            }
+        }
+        catch (e) {
+            console.log(e);
+            res.status(400).send(e);
+        }
+    },
+    async commenterUnObjet(req, res) {
+        try {
+            const unNouveauCommentaire = await commentaire.create({
+                Contenu: req.body.Commentaire,
+                Statut: "EnAttente",
+                DateCommentaire: new Date(),
+                objetId: parseInt(req.params.objetId)
+            });
+            if(unNouveauCommentaire){
+                res.status(201).json(unNouveauCommentaire);
+            } else {
+                res.status(201).json({"message": "Commentaire non enregistré"});
             }
         }
         catch (e) {

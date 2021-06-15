@@ -61,6 +61,23 @@ module.exports = {
             res.status(500).send(e);
         }
     },
+    async verifierAbonne(req, res) {
+        try {
+            const unAbonne = await abonne.findOne({
+                where: { id: req.params.abonneId }
+            });
+            if (unAbonne) {
+                res.status(201).json({"message": "ok"});
+            }
+            else {
+                res.status(200).json({ "message": "Ce numéro d'abonné n'existe pas!" });
+            }
+        }
+        catch (e) {
+            console.log(e);
+            res.status(500).send(e);
+        }
+    },
     async mettreAJourUnAbonne(req, res) {
         try {
             const abonneAMettreAJour = await abonne.findOne({

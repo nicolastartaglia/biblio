@@ -16,8 +16,6 @@ module.exports = {
                     }
                 }
             });
-            console.log("liste des objets");
-            console.log(objetsEmpruntes);
             if (objetsEmpruntes) {
                 const unNouvelEmprunt = await emprunt.create({
                     DateEmprunt: new Date(),

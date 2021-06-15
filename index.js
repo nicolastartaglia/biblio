@@ -107,37 +107,37 @@ function initial() {
     EtagereBac: "201",
     Code3C: "STE",
     Etat: "",
-    TypeObjet: "ecrit",
-    empruntId: null,
-    ReservePar: null,
-    CreePar: 2, 
-    MisAJourPar: 2
+    TypeObjet: "ecrit"
+    // empruntId: null,
+    // ReservePar: null,
+    // CreePar: 2, 
+    // MisAJourPar: 2
   });
  
-  // objet.create({
-  //   Titre: "Germinal",
-  //   AuteurScenariste: "Émile ZOLA",
-  //   Realisateur: "",
-  //   Scenariste: "",
-  //   Genre: "roman",
-  //   Annee: "2018",
-  //   Duree: 0,
-  //   Description: "",
-  //   Edition: "Atlantic",
-  //   Pages: 480,
-  //   Dessinateur: "",
-  //   Artiste: "",
-  //   Zone: "ET2",
-  //   Travee: "D",
-  //   EtagereBac: "101",
-  //   Code3C: "ZOL",
-  //   Etat: "",
-  //   TypeObjet: "ecrit",
-  //   empruntId: null,
-  //   ReservePar: null,
-  //   CreePar: 2,
-  //   MisAJourPar: 2
-  // });
+  objet.create({
+    Titre: "Germinal",
+    AuteurScenariste: "Émile ZOLA",
+    Realisateur: "",
+    Scenariste: "",
+    Genre: "roman",
+    Annee: "2018",
+    Duree: 0,
+    Description: "",
+    Edition: "Atlantic",
+    Pages: 480,
+    Dessinateur: "",
+    Artiste: "",
+    Zone: "ET2",
+    Travee: "D",
+    EtagereBac: "101",
+    Code3C: "ZOL",
+    Etat: "",
+    TypeObjet: "ecrit"
+    // empruntId: null,
+    // ReservePar: null,
+    // CreePar: 2,
+    // MisAJourPar: 2
+  });
   
 
 }
@@ -152,6 +152,8 @@ require('./src/routes/bibliothecaire.routes')(app);
 require('./src/routes/abonnes.routes')(app);
 require('./src/routes/objets.routes')(app);
 require('./src/routes/emprunts.routes')(app);
+require('./src/routes/commentaires.routes')(app);
+
 
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to our application." });

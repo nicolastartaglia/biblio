@@ -5,6 +5,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         Statut: {
             type: Sequelize.STRING
+        },
+        DateCommentaire: {
+            type: Sequelize.DATE
         }
     });
     return commentaire;

@@ -9,4 +9,5 @@ module.exports = function (app) {
     app.post("/objet/recherche", controllerObjet.obtenirQuelquesObjets);
     app.post("/objet/emprunt", middlewareVerification.verifierPresenceJeton, controllerObjet.obtenirUnObjetAEmprunter);
     app.post("/objet/reserver", controllerObjet.reserverUnObjet);
+    app.post("/objet/:objetId/commentaire", controllerObjet.commenterUnObjet);
 };

@@ -57,19 +57,19 @@ module.exports = (sequelize, Sequelize) => {
         },
         TypeObjet :{
             type: Sequelize.STRING
-        },
-        empruntId:{
-            type: Sequelize.INTEGER
-        },
-        ReservePar :{
-            type: Sequelize.INTEGER
-        },
-        CreePar :{
-            type: Sequelize.INTEGER
-        },
-        MisAJourPar :{
-            type: Sequelize.INTEGER
         }
+        // empruntId:{
+        //     type: Sequelize.INTEGER
+        // },
+        // ReservePar :{
+        //     type: Sequelize.INTEGER
+        // },
+        // CreePar :{
+        //     type: Sequelize.INTEGER
+        // },
+        // MisAJourPar :{
+        //     type: Sequelize.INTEGER
+        // }
     });
     return objet;
 }

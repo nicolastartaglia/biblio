@@ -10,5 +10,5 @@ module.exports = function (app) {
     app.post("/abonne", middlewareVerification.verifierPresenceJeton, controllerAbonne.ajouterUnAbonne);
     app.post("/abonne/recherche", middlewareVerification.verifierPresenceJeton, controllerAbonne.obtenirQuelquesAbonnes);
     app.get("/abonne/emprunt/:abonneId", middlewareVerification.verifierPresenceJeton, controllerAbonne.obtenirLeDernierEmpruntDunAbonne);
-
+    app.get("/abonne/:abonneId/verifier", controllerAbonne.verifierAbonne);
 };
