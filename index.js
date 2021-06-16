@@ -106,7 +106,7 @@ function initial() {
     Travee: "B",
     EtagereBac: "201",
     Code3C: "STE",
-    Etat: "",
+    Etat: "correct",
     TypeObjet: "ecrit"
     // empruntId: null,
     // ReservePar: null,
@@ -131,7 +131,7 @@ function initial() {
     Travee: "D",
     EtagereBac: "101",
     Code3C: "ZOL",
-    Etat: "",
+    Etat: "correct",
     TypeObjet: "ecrit"
     // empruntId: null,
     // ReservePar: null,

@@ -93,7 +93,7 @@ module.exports = {
     async obtenirUnObjetAEmprunter(req, res) {
         try {
             const unObjet = await objet.findOne({
-                where: { id: req.body.objetId }
+                where: { id: req.body.objetId, Etat: "correct" }
             });
             if (unObjet) {
                 if(unObjet.empruntId == null){
@@ -114,7 +114,7 @@ module.exports = {
                 }
             }
             else {
-                res.status(200).json({ "message": "Ce numéro d'objet n'existe pas!" });
+                res.status(200).json({ "message": "Ce numéro d'objet n'existe pas ou n'a pas été réintégré en base de données (voir liste des objets abîmés et/ou perdus)!" });
             }
         }
         catch (e) {
@@ -222,8 +222,6 @@ module.exports = {
                 where: { id: req.body.objetId }
             }))
             if (objetAReserver) {
-                console.log("donnees");
-                console.log(req.body);
                 const objetReserve = await objetAReserver.update({ ReservePar: req.body.ReservePar, DateReservation: new Date() });
                 res.status(201).json({ "message": "Cet objet a été réservé" });
             }
@@ -248,6 +246,62 @@ module.exports = {
                 res.status(201).json(unNouveauCommentaire);
             } else {
                 res.status(201).json({"message": "Commentaire non enregistré"});
+            }
+        }
+        catch (e) {
+            console.log(e);
+            res.status(400).send(e);
+        }
+    },
+    async obtenirTousLesObjetsPerdus(req, res) {
+        try {
+            const objetsPerdus = await objet.findAll({
+                where: { 
+                     Etat: "perdu"  
+                }
+            });
+            if (objetsPerdus) {
+                res.status(201).json(objetsPerdus);
+            }
+            else {
+                res.status(200).json({ "message": "Pas d'objet perdu à traiter" });
+            }
+        }
+        catch (e) {
+            console.log(e);
+            res.status(500).send(e);
+        }
+    },
+    async obtenirTousLesObjetsAbimes(req, res) {
+        try {
+            const objetsAbimes = await objet.findAll({
+                where: { 
+                     Etat: "abime"  
+                }
+            });
+            if (objetsAbimes) {
+                res.status(201).json(objetsAbimes);
+            }
+            else {
+                res.status(200).json({ "message": "Pas d'objet perdu à traiter" });
+            }
+        }
+        catch (e) {
+            console.log(e);
+            res.status(500).send(e);
+        }
+    },
+    async reintegrerObjet(req, res) {
+        try {
+            const objetAReintegrer = await objet.findOne(({
+                where: { id: req.params.objetId }
+            }))
+            if (objetAReintegrer) {
+                await objetAReintegrer.update({ Etat: "correct" });
+                res.status(201).json({ "message": "Cet objet a été réintégré" });
+            }
+            else {
+                res.status(200).json({ "message": "objet inconnu" });
             }
         }
         catch (e) {

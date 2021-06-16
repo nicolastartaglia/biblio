@@ -3,7 +3,7 @@ const config = require("../config/auth.config.js");
 
 module.exports = (req, res, next) => {
   let token = req.headers["x-access-token"];
-
+  
   if (!token) {
     return res.status(200).json({
       message: "Compte utilisateur non authentifié!"

@@ -2,6 +2,8 @@ const controllerObjet = require("../controllers/objet.controller");
 const middlewareVerification = require("../middleware");
 
 module.exports = function (app) {
+    app.get("/objet/perdu", middlewareVerification.verifierPresenceJeton, controllerObjet.obtenirTousLesObjetsPerdus);
+    app.get("/objet/abime", middlewareVerification.verifierPresenceJeton, controllerObjet.obtenirTousLesObjetsAbimes);
     app.get("/objet/:objetId", controllerObjet.obtenirUnObjet);
     app.put("/objet/:objetId", middlewareVerification.verifierPresenceJeton, controllerObjet.mettreAJourUnObjet);
     app.delete("/objet/:objetId", middlewareVerification.verifierPresenceJeton, controllerObjet.supprimerUnObjet);
@@ -10,4 +12,5 @@ module.exports = function (app) {
     app.post("/objet/emprunt", middlewareVerification.verifierPresenceJeton, controllerObjet.obtenirUnObjetAEmprunter);
     app.post("/objet/reserver", controllerObjet.reserverUnObjet);
     app.post("/objet/:objetId/commentaire", controllerObjet.commenterUnObjet);
+    app.put("/objet/reintegrer/:objetId", controllerObjet.reintegrerObjet);
 };

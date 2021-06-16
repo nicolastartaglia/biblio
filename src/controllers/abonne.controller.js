@@ -182,7 +182,7 @@ module.exports = {
             });
             if (abonneAMettreAJour) {
                 const abonneMisAJour = await abonneAMettreAJour.update({
-                    Amende: 0.0
+                    Amende: parseFloat(req.body.Amende)
                 });
                 res.status(201).json(abonneMisAJour);
             }
@@ -202,7 +202,7 @@ module.exports = {
             });
             if (abonneAMettreAJour) {
                 const abonneMisAJour = await abonneAMettreAJour.update({
-                    DateLimiteAbonnement: new Date((new Date()).setDate((new Date()).getDate() + 365))
+                    DateLimiteAbonnement: new Date(req.body.DateLimiteAbonnement)
                   
                 });
                 console.log(abonneMisAJour);
