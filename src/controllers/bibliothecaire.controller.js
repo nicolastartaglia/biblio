@@ -78,7 +78,6 @@ module.exports = {
             }))
             if (bibliothecaireASupprimer) {
                 bibliothecaireASupprimer.destroy();
-                console.log("pas d'erreur");
                 res.status(201).json({"message": "bibliothecaire supprimé"});
             }
             else {
